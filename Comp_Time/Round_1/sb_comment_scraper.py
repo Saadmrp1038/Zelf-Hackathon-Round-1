@@ -6,15 +6,12 @@ from selenium.webdriver.common.keys import Keys
 
 FILE_DIR = "./Comp_Time/Round_1"
 
-USERNAME = "siamai462"
-COMMENT = "Very Nice"
-
-def scroll_to_load_all_comments(sb, delay=1, max_tries=15):
+def scroll_to_load_all_comments(sb, delay=1, max_tries=5):
     last_comment_count = 0
     tries = 0
 
     while tries < max_tries:
-        current_comment_elements = sb.find_elements(By.CSS_SELECTOR, "css-ex1vmp-DivCommentContentContaine.e1g2efjf0")
+        current_comment_elements = sb.find_elements(By.CSS_SELECTOR, "div.css-13wx63w-DivCommentObjectWrapper.ezgpko42")
         current_comment_count = len(current_comment_elements)
         
         sb.scroll_to_bottom()
@@ -48,7 +45,7 @@ def main():
         scroll_to_load_all_comments(sb)
         
         
-        comment_elements = sb.find_elements(By.CSS_SELECTOR,"div.css-ex1vmp-DivCommentContentContaine.e1g2efjf0")
+        comment_elements = sb.find_elements(By.CSS_SELECTOR,"div.css-13wx63w-DivCommentObjectWrapper.ezgpko42")
         print("Comment Count: ", len(comment_elements))
         
         comments = []
@@ -73,12 +70,9 @@ def main():
                 "comment_text": comment_text
             }
             
-            if username == USERNAME and comment_text == COMMENT:
-                print("Your comment was successfully posted")
-                print(json.dump(comment, indent=4))
+            comments.append(comments)
+            print(index)
             
-            comments.append(comment)
-        
         with open(f"{FILE_DIR}/comments.json", "w",) as f:
             json.dump(comments, f, indent=4)
         
