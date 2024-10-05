@@ -70,7 +70,7 @@ def main():
                 "comment_text": comment_text
             }
             
-            comments.append(comments)
+            comments.append(comment)
             print(index)
             
         with open(f"{FILE_DIR}/comments.json", "w",) as f:
